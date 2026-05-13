@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>One Expand Prospects</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── THEME VARIABLES ── */
+:root {
+  --bg:        #f5f7fa;
+  --surface:   #ffffff;
+  --surface2:  #f0f4f8;
+  --surface3:  #e8edf3;
+  --border:    #dce2ea;
+  --border2:   #c8d1db;
+  --primary:   #2563eb;
+  --primary-h: #1d4ed8;
+  --primary-l: #eff6ff;
+  --success:   #16a34a;
+  --success-l: #f0fdf4;
+  --warn:      #d97706;
+  --warn-l:    #fffbeb;
+  --danger:    #dc2626;
+  --danger-l:  #fef2f2;
+  --text:      #0f172a;
+  --text2:     #475569;
+  --text3:     #94a3b8;
+  --text4:     #cbd5e1;
+  --shadow:    0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+  --shadow2:   0 4px 12px rgba(0,0,0,.10);
+  --radius:    10px;
+  --radius-sm: 7px;
+}
+[data-theme="dark"] {
+  --bg:        #0d1117;
+  --surface:   #161b22;
+  --surface2:  #1e2530;
+  --surface3:  #252d3a;
+  --border:    #2d3748;
+  --border2:   #3d4f65;
+  --primary:   #3b82f6;
+  --primary-h: #60a5fa;
+  --primary-l: #1e3a5f;
+  --success:   #22c55e;
+  --success-l: #14532d;
+  --warn:      #f59e0b;
+  --warn-l:    #451a03;
+  --danger:    #ef4444;
+  --danger-l:  #450a0a;
+  --text:      #f1f5f9;
+  --text2:     #94a3b8;
+  --text3:     #475569;
+  --text4:     #2d3748;
+  --shadow:    0 1px 3px rgba(0,0,0,.3);
+  --shadow2:   0 4px 12px rgba(0,0,0,.4);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body {
+  width: 500px;
+  min-height: 520px;
+  background: var(--bg);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  transition: background .2s, color .2s;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo { display:flex; align-items:center; gap:9px; }
+.logo-icon {
+  width:34px; height:34px;
+  background: linear-gradient(135deg,#2563eb,#0ea5e9);
+  border-radius:9px;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 2px 8px rgba(37,99,235,.3);
+}
+.logo-icon svg { width:18px; height:18px; fill:#fff; }
+.logo-name { font-size:15px; font-weight:700; letter-spacing:-.3px; }
+.logo-tag { font-size:10px; color:var(--text2); margin-top:1px; font-weight:400; }
+.header-right { display:flex; align-items:center; gap:8px; }
+.badge-free {
+  background:var(--primary-l); color:var(--primary);
+  font-size:10px; font-weight:600;
+  padding:3px 8px; border-radius:20px; border:1px solid rgba(37,99,235,.15);
+  letter-spacing:.3px;
+}
+.btn-theme {
+  width:32px; height:32px;
+  background:var(--surface2); border:1px solid var(--border);
+  border-radius:8px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:.15s; color:var(--text2);
+}
+.btn-theme:hover { background:var(--surface3); color:var(--text); }
+.btn-theme svg { width:16px; height:16px; }
+
+/* ── TABS ── */
+.tabs {
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  padding: 0 8px;
+}
+.tab {
+  display:flex; align-items:center; gap:5px;
+  padding:10px 12px;
+  font-size:12px; font-weight:500;
+  color:var(--text2);
+  cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:.15s; white-space:nowrap;
+  margin-bottom:-1px;
+}
+.tab svg { width:14px; height:14px; flex-shrink:0; }
+.tab.active { color:var(--primary); border-bottom-color:var(--primary); }
+.tab:hover:not(.active) { color:var(--text); }
+
+/* ── TAB PANELS ── */
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+/* ── INFO BANNER ── */
+.info-banner {
+  background:var(--primary-l);
+  border-bottom:1px solid rgba(37,99,235,.15);
+  padding:9px 16px;
+  display:flex; align-items:flex-start; gap:8px;
+  font-size:11.5px; color:var(--primary); line-height:1.5;
+}
+.info-banner svg { width:15px; height:15px; flex-shrink:0; margin-top:1px; }
+
+/* ── FORM PANEL ── */
+.form-panel { padding:14px 16px; }
+
+.row-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:12px; }
+.row-2 { display:grid; grid-template-columns:1fr 1.8fr; gap:10px; margin-bottom:12px; }
+.row-1 { margin-bottom:12px; }
+
+.field-label {
+  display:flex; align-items:center; gap:5px;
+  font-size:10.5px; font-weight:600; letter-spacing:.5px;
+  text-transform:uppercase; color:var(--text2); margin-bottom:5px;
+}
+.field-label svg { width:12px; height:12px; color:var(--text3); }
+.required { color:var(--danger); margin-left:1px; }
+
+.select-wrap { position:relative; }
+.select-wrap svg.arrow {
+  position:absolute; right:10px; top:50%; transform:translateY(-50%);
+  width:14px; height:14px; color:var(--text3); pointer-events:none;
+}
+select, .search-select {
+  width:100%;
+  padding:8px 32px 8px 10px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  color:var(--text);
+  font-family:inherit; font-size:12.5px;
+  appearance:none; -webkit-appearance:none;
+  cursor:pointer; transition:.15s;
+  outline:none;
+}
+select:focus, .search-select:focus {
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(37,99,235,.12);
+}
+select:disabled { opacity:.45; cursor:not-allowed; background:var(--surface2); }
+
+/* SEARCHABLE DROPDOWN */
+.dropdown-wrap { position:relative; }
+.dropdown-input {
+  width:100%;
+  padding:8px 32px 8px 10px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  color:var(--text);
+  font-family:inherit; font-size:12.5px;
+  outline:none; transition:.15s; cursor:pointer;
+}
+.dropdown-input:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,.12); }
+.dropdown-input::placeholder { color:var(--text3); }
+.dropdown-list {
+  position:absolute; top:calc(100% + 4px); left:0; right:0;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow2);
+  max-height:220px; overflow-y:auto;
+  z-index:999; display:none;
+}
+.dropdown-list.open { display:block; }
+.dropdown-list::-webkit-scrollbar { width:5px; }
+.dropdown-list::-webkit-scrollbar-thumb { background:var(--border2); border-radius:3px; }
+.dd-group-label {
+  padding:6px 10px 3px;
+  font-size:9.5px; font-weight:700; letter-spacing:1px;
+  text-transform:uppercase; color:var(--text3);
+  border-top:1px solid var(--border);
+}
+.dd-group-label:first-child { border-top:none; }
+.dd-option {
+  padding:8px 12px;
+  cursor:pointer; font-size:12.5px; color:var(--text);
+  transition:.1s;
+}
+.dd-option:hover, .dd-option.highlighted { background:var(--primary-l); color:var(--primary); }
+.dd-option.selected { background:var(--primary); color:#fff; }
+.dd-empty { padding:14px 12px; color:var(--text3); font-size:12px; text-align:center; }
+
+/* NICHE COUNT BADGE */
+.niche-badge {
+  display:inline-flex; align-items:center; gap:4px;
+  background:var(--warn-l); color:var(--warn);
+  font-size:10px; font-weight:600;
+  padding:2px 7px; border-radius:20px;
+  border:1px solid rgba(217,119,6,.15);
+  margin-left:6px;
+}
+.niche-badge svg { width:11px; height:11px; }
+
+/* OPEN IN MAPS BUTTON */
+.btn-maps {
+  width:100%;
+  padding:11px 20px;
+  background:var(--primary);
+  color:#fff;
+  border:none; border-radius:var(--radius);
+  font-family:inherit; font-size:13.5px; font-weight:600;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  transition:.15s;
+  box-shadow:0 2px 8px rgba(37,99,235,.25);
+}
+.btn-maps:hover { background:var(--primary-h); box-shadow:0 4px 14px rgba(37,99,235,.35); transform:translateY(-1px); }
+.btn-maps:active { transform:translateY(0); }
+.btn-maps:disabled { opacity:.5; cursor:not-allowed; transform:none !important; box-shadow:none; }
+.btn-maps svg { width:16px; height:16px; }
+
+/* TIPS CARD */
+.tips-card {
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:14px;
+  margin-top:14px;
+}
+.tips-header {
+  display:flex; align-items:center; gap:7px;
+  font-size:13px; font-weight:600; margin-bottom:10px;
+}
+.tips-header svg { width:16px; height:16px; color:var(--primary); }
+.tips-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 16px; }
+.tips-col-title { font-size:10.5px; font-weight:700; color:var(--text2); margin-bottom:5px; letter-spacing:.3px; text-transform:uppercase; }
+.tips-list { list-style:none; }
+.tips-list li {
+  font-size:11.5px; color:var(--text2);
+  padding:2px 0; display:flex; align-items:flex-start; gap:5px; line-height:1.45;
+}
+.tips-list li::before { content:''; width:4px; height:4px; background:var(--primary); border-radius:50%; margin-top:5px; flex-shrink:0; }
+.note-box {
+  background:var(--primary-l);
+  border:1px solid rgba(37,99,235,.15);
+  border-radius:var(--radius-sm);
+  padding:9px 12px;
+  display:flex; align-items:flex-start; gap:7px;
+  font-size:11.5px; color:var(--primary); margin-top:12px; line-height:1.5;
+}
+.note-box svg { width:14px; height:14px; flex-shrink:0; margin-top:1px; }
+
+/* ── SCRAPER TAB ── */
+.scraper-panel { padding:14px 16px; }
+
+.status-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:11px 14px;
+  display:flex; align-items:center; gap:10px;
+  margin-bottom:12px;
+  box-shadow:var(--shadow);
+}
+.status-dot {
+  width:8px; height:8px; border-radius:50%;
+  background:var(--border2); flex-shrink:0;
+}
+.status-dot.running { background:#16a34a; box-shadow:0 0 0 3px rgba(22,163,74,.2); animation:pulse 1.5s infinite; }
+.status-dot.done { background:#16a34a; }
+.status-dot.error { background:var(--danger); }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.4} }
+.status-text { font-size:12px; color:var(--text2); flex:1; }
+.status-text strong { color:var(--text); }
+
+.progress-wrap { margin-bottom:12px; }
+.progress-row { display:flex; justify-content:space-between; font-size:11px; color:var(--text2); margin-bottom:5px; }
+.progress-bar { height:5px; background:var(--surface3); border-radius:3px; overflow:hidden; }
+.progress-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--primary),#0ea5e9); border-radius:3px; transition:width .4s ease; }
+
+.stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:12px; }
+.stat-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:10px 12px; text-align:center;
+  box-shadow:var(--shadow);
+}
+.stat-num { font-size:22px; font-weight:700; color:var(--primary); line-height:1; }
+.stat-num.g { color:var(--success); }
+.stat-num.o { color:var(--warn); }
+.stat-lbl { font-size:9.5px; color:var(--text3); text-transform:uppercase; letter-spacing:.5px; margin-top:3px; }
+
+.btns-row { display:flex; gap:8px; margin-bottom:12px; }
+.btn {
+  flex:1; padding:9px 12px;
+  border:none; border-radius:var(--radius-sm);
+  font-family:inherit; font-size:12.5px; font-weight:600;
+  cursor:pointer; transition:.15s;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+}
+.btn svg { width:14px; height:14px; }
+.btn-start { background:var(--primary); color:#fff; }
+.btn-start:hover { background:var(--primary-h); }
+.btn-stop  { background:var(--danger-l); color:var(--danger); border:1px solid rgba(220,38,38,.2); }
+.btn-stop:hover { background:rgba(220,38,38,.12); }
+.btn:disabled { opacity:.4; cursor:not-allowed; }
+
+/* LIVE FEED */
+.feed-box {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden; max-height:200px; overflow-y:auto;
+  box-shadow:var(--shadow);
+}
+.feed-box::-webkit-scrollbar { width:4px; }
+.feed-box::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+.feed-head {
+  padding:7px 12px;
+  background:var(--surface2);
+  border-bottom:1px solid var(--border);
+  font-size:10px; font-weight:700; letter-spacing:.8px;
+  text-transform:uppercase; color:var(--text3);
+  display:flex; align-items:center; gap:6px;
+}
+.feed-head svg { width:12px; height:12px; }
+.feed-empty { padding:24px; text-align:center; color:var(--text3); font-size:12px; }
+.feed-item {
+  padding:8px 12px;
+  border-bottom:1px solid var(--border);
+  animation:fadeSlide .25s ease;
+}
+.feed-item:last-child { border-bottom:none; }
+@keyframes fadeSlide { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:none} }
+.fi-name { font-size:12.5px; font-weight:600; }
+.fi-meta { font-size:11px; color:var(--text2); margin-top:2px; }
+.fi-pills { display:flex; gap:4px; margin-top:4px; flex-wrap:wrap; }
+.pill {
+  font-size:10px; padding:2px 7px; border-radius:20px;
+  font-weight:500; display:flex; align-items:center; gap:3px;
+}
+.pill svg { width:10px; height:10px; }
+.pill-phone { background:var(--primary-l); color:var(--primary); }
+.pill-email { background:var(--success-l); color:var(--success); }
+.pill-web   { background:var(--warn-l);    color:var(--warn); }
+.pill-social{ background:var(--surface3);  color:var(--text2); }
+
+/* ── LEADS TAB ── */
+.leads-panel { padding:14px 16px; }
+.leads-toolbar { display:flex; gap:8px; margin-bottom:10px; }
+.search-box {
+  flex:1; padding:8px 12px;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-sm); color:var(--text);
+  font-family:inherit; font-size:12.5px; outline:none; transition:.15s;
+}
+.search-box:focus { border-color:var(--primary); }
+.search-box::placeholder { color:var(--text3); }
+
+.table-wrap {
+  border:1px solid var(--border); border-radius:var(--radius);
+  overflow:hidden; max-height:330px; overflow-y:auto;
+  box-shadow:var(--shadow);
+}
+.table-wrap::-webkit-scrollbar { width:5px; }
+.table-wrap::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+table { width:100%; border-collapse:collapse; font-size:11.5px; }
+thead { background:var(--surface2); position:sticky; top:0; z-index:1; }
+th {
+  padding:8px 10px; text-align:left;
+  font-size:9.5px; font-weight:700; letter-spacing:.6px;
+  text-transform:uppercase; color:var(--text3);
+  border-bottom:1px solid var(--border); white-space:nowrap;
+}
+td {
+  padding:7px 10px;
+  border-bottom:1px solid var(--border);
+  color:var(--text);
+  max-width:100px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+tr:last-child td { border-bottom:none; }
+tr:hover td { background:var(--primary-l); }
+.no-data { padding:28px; text-align:center; color:var(--text3); font-size:12px; }
+
+.export-row { display:flex; gap:7px; margin-top:10px; }
+.btn-sm {
+  flex:1; padding:8px;
+  border:none; border-radius:var(--radius-sm);
+  font-family:inherit; font-size:12px; font-weight:600;
+  cursor:pointer; transition:.15s;
+  display:flex; align-items:center; justify-content:center; gap:5px;
+}
+.btn-sm svg { width:13px; height:13px; }
+.btn-csv  { background:var(--success-l); color:var(--success); border:1px solid rgba(22,163,74,.2); }
+.btn-csv:hover  { background:rgba(22,163,74,.15); }
+.btn-json { background:var(--primary-l); color:var(--primary); border:1px solid rgba(37,99,235,.2); }
+.btn-json:hover { background:rgba(37,99,235,.15); }
+.btn-clr  { background:var(--danger-l);  color:var(--danger);  border:1px solid rgba(220,38,38,.2); }
+.btn-clr:hover  { background:rgba(220,38,38,.12); }
+
+/* ── SETTINGS TAB ── */
+.settings-panel { padding:14px 16px; }
+.settings-section { margin-bottom:16px; }
+.section-hd {
+  font-size:10.5px; font-weight:700; letter-spacing:.8px;
+  text-transform:uppercase; color:var(--text3);
+  padding-bottom:7px; border-bottom:1px solid var(--border); margin-bottom:10px;
+  display:flex; align-items:center; gap:6px;
+}
+.section-hd svg { width:12px; height:12px; }
+.setting-row {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:9px 0; border-bottom:1px solid var(--border);
+}
+.setting-row:last-child { border-bottom:none; }
+.setting-info .s-name { font-size:13px; font-weight:500; }
+.setting-info .s-desc { font-size:11px; color:var(--text2); margin-top:2px; }
+.toggle { position:relative; width:36px; height:20px; flex-shrink:0; cursor:pointer; }
+.toggle input { opacity:0; width:0; height:0; }
+.slider {
+  position:absolute; inset:0;
+  background:var(--surface3); border-radius:20px;
+  border:1px solid var(--border2); transition:.2s;
+}
+.slider:before {
+  content:''; position:absolute;
+  width:14px; height:14px; left:2px; top:2px;
+  background:var(--text3); border-radius:50%; transition:.2s;
+}
+.toggle input:checked + .slider { background:rgba(37,99,235,.2); border-color:var(--primary); }
+.toggle input:checked + .slider:before { transform:translateX(16px); background:var(--primary); }
+
+.field-group { margin-bottom:10px; }
+.field-group label { display:block; font-size:10.5px; font-weight:600; letter-spacing:.4px; color:var(--text2); text-transform:uppercase; margin-bottom:5px; }
+.field-input {
+  width:100%; padding:8px 10px;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-sm); color:var(--text);
+  font-family:inherit; font-size:13px; outline:none; transition:.15s;
+}
+.field-input:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,.1); }
+
+/* ── NOT ON MAPS ── */
+.not-maps {
+  padding:32px 20px; text-align:center;
+}
+.not-maps-icon {
+  width:56px; height:56px;
+  background:var(--primary-l);
+  border-radius:16px;
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 14px;
+}
+.not-maps-icon svg { width:28px; height:28px; color:var(--primary); }
+.not-maps h3 { font-size:15px; font-weight:700; margin-bottom:6px; }
+.not-maps p { font-size:12.5px; color:var(--text2); line-height:1.6; }
+.btn-goto {
+  display:inline-flex; align-items:center; gap:6px;
+  margin-top:14px;
+  padding:9px 18px;
+  background:var(--primary); color:#fff;
+  text-decoration:none; border-radius:var(--radius);
+  font-size:13px; font-weight:600;
+  box-shadow:0 2px 8px rgba(37,99,235,.25);
+  transition:.15s;
+}
+.btn-goto:hover { background:var(--primary-h); }
+.btn-goto svg { width:15px; height:15px; }
+
+/* ALERT */
+.alert { padding:9px 12px; border-radius:var(--radius-sm); font-size:11.5px; margin-bottom:10px; display:none; align-items:center; gap:7px; line-height:1.4; }
+.alert.show { display:flex; }
+.alert svg { width:14px; height:14px; flex-shrink:0; }
+.alert-err  { background:var(--danger-l);  color:var(--danger);  border:1px solid rgba(220,38,38,.2); }
+.alert-ok   { background:var(--success-l); color:var(--success); border:1px solid rgba(22,163,74,.2); }
+.alert-info { background:var(--primary-l); color:var(--primary); border:1px solid rgba(37,99,235,.2); }
+
+/* ── ARROW SVG ── */
+.arrow-dn { pointer-events:none; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon" style="background:none;box-shadow:none;padding:2px;width:38px;height:38px;">
+      <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 1000 1000"><path d="M 215.858 29.476 C 215.585 29.748, 211.343 30.409, 206.431 30.943 C 186.341 33.129, 173.120 36.621, 151 45.585 C 140.512 49.835, 115.122 64.387, 112 67.937 C 111.725 68.249, 108.808 70.529, 105.518 73.003 C 84.358 88.910, 62.529 115.938, 49.793 142 C 39.282 163.509, 34.147 180.862, 30.707 206.500 C 28.960 219.522, 28.960 780.478, 30.707 793.500 C 34.147 819.138, 39.282 836.491, 49.793 858 C 54.767 868.178, 63.786 882.997, 68.646 888.977 C 69.327 889.815, 72.771 894.100, 76.300 898.500 C 83.585 907.584, 96.669 920.346, 105.518 926.997 C 108.808 929.471, 111.725 931.751, 112 932.063 C 115.339 935.860, 141.722 950.774, 152.938 955.204 C 173.877 963.476, 186.450 966.802, 205 968.978 C 214.817 970.129, 785.183 970.129, 795 968.978 C 807.092 967.560, 820.845 964.629, 831.500 961.201 C 849.755 955.326, 875.888 941.769, 888.977 931.383 C 907.749 916.488, 917.064 907.175, 931.392 888.977 C 936.777 882.139, 946.586 865.721, 951.396 855.500 C 960.566 836.010, 966.606 815.227, 968.978 795 C 970.129 785.183, 970.129 214.817, 968.978 205 C 968.052 197.108, 966.859 190.477, 965.017 183 C 964.407 180.525, 963.529 176.925, 963.065 175 C 962.342 172.001, 958.728 161.857, 955.204 152.938 C 950.540 141.131, 938.730 120.342, 931.392 111.023 C 917.064 92.825, 907.749 83.512, 888.977 68.617 C 875.888 58.231, 849.755 44.674, 831.500 38.799 C 822.053 35.760, 809.281 32.926, 795.500 30.813 C 788.436 29.730, 216.922 28.411, 215.858 29.476 M 213 73.089 C 194.880 74.919, 179.057 79.524, 161 88.223 C 111.912 111.872, 78.495 159.650, 73.029 214 C 71.912 225.103, 71.912 774.897, 73.029 786 C 74.948 805.083, 79.258 820.285, 87.941 838.593 C 111.113 887.456, 159.686 921.509, 214 926.971 C 225.103 928.088, 774.897 928.088, 786 926.971 C 796.515 925.914, 803.237 924.619, 816 921.194 C 817.925 920.677, 822.997 918.848, 827.271 917.129 C 858.300 904.651, 883.400 884.374, 901.704 857 C 909.286 845.659, 917.889 827.162, 921.119 815.250 C 921.603 813.462, 922.488 810.313, 923.083 808.250 C 924.840 802.168, 925.989 795.144, 926.968 784.500 C 928.188 771.231, 928.188 228.769, 926.968 215.500 C 925.073 194.894, 921.096 180.461, 912.059 161.407 C 895.261 125.985, 865.168 98.111, 827.271 82.871 C 822.997 81.152, 817.925 79.323, 816 78.806 C 803.237 75.381, 796.515 74.086, 786 73.029 C 775.538 71.977, 223.439 72.034, 213 73.089 M 171.454 216.260 C 171.188 216.953, 171.090 231.465, 171.235 248.510 L 171.500 279.500 207.500 280 L 243.500 280.500 244 522.500 L 244.500 764.500 279.382 764.763 C 304.293 764.951, 314.655 764.702, 315.632 763.891 C 317.531 762.315, 317.698 218.098, 315.800 216.200 C 314.008 214.408, 172.142 214.467, 171.454 216.260 M 487.452 226.264 C 487.184 226.963, 487.085 239.002, 487.232 253.017 L 487.500 278.500 621.500 278.500 L 755.500 278.500 755.500 252 L 755.500 225.500 621.720 225.246 C 514.263 225.043, 487.844 225.243, 487.452 226.264 M 597.500 341.526 C 596.950 341.775, 593.125 342.399, 589 342.912 C 577.730 344.316, 562.193 347.901, 550.500 351.795 C 508.747 365.701, 474.941 391.946, 451.051 429 C 446.914 435.416, 437.431 453.672, 435.207 459.500 C 434.578 461.150, 433.113 464.975, 431.953 468 C 429.116 475.393, 427.974 478.835, 426.973 483 C 426.511 484.925, 425.643 488.300, 425.044 490.500 C 420.773 506.180, 417.596 533.844, 417.636 555 C 417.703 589.777, 423.740 623.805, 434.136 648 C 441.669 665.529, 452.943 685.460, 460.893 695.300 C 472.864 710.117, 489.682 726.671, 499.500 733.299 C 502.800 735.527, 505.725 737.613, 506 737.934 C 507.762 739.992, 528.267 751.102, 539.285 755.968 C 544.968 758.478, 560.854 763.851, 566.500 765.173 C 583.019 769.040, 588.108 769.770, 608.250 771.167 C 639.743 773.349, 672.035 769.735, 697.749 761.148 C 735.591 748.512, 766.117 725.574, 791.769 690.500 C 793.576 688.029, 800.088 676.914, 803.195 671 C 808.679 660.558, 816.978 638.434, 816.241 636.222 C 815.929 635.288, 806.892 635, 777.885 635 C 742.642 635, 739.894 635.125, 739.331 636.750 C 738.997 637.712, 737.050 642.137, 735.005 646.583 C 721.367 676.226, 695.995 697.445, 664 705.967 C 654.520 708.491, 652.222 708.941, 643 710.076 C 622.791 712.563, 596.098 709.901, 577.500 703.544 C 559.523 697.400, 544.150 687.988, 530.169 674.568 C 513.377 658.449, 502.382 639.863, 496.813 618.184 C 494.247 608.192, 493.783 606.066, 492.960 600.500 C 492.471 597.200, 491.768 591.914, 491.397 588.753 L 490.723 583.006 656.611 582.753 L 822.500 582.500 823.262 575.500 C 824.796 561.411, 825.276 526.727, 824.072 517 C 822.584 504.981, 821.092 495.552, 819.917 490.750 C 815.828 474.033, 814.729 470.534, 809.153 456.500 C 803.517 442.314, 791.881 422.928, 780.874 409.384 C 764.259 388.940, 734.279 366.404, 712 357.612 C 709.525 356.635, 706.150 355.228, 704.500 354.485 C 694.999 350.208, 679.513 346.126, 660.500 342.886 C 654.498 341.864, 599.387 340.674, 597.500 341.526 M 605 402.544 C 590.790 404.417, 588.306 404.949, 578.500 408.220 C 566.379 412.264, 558.174 416.257, 547.902 423.110 C 523.542 439.363, 505.574 464.175, 498.014 492 C 497.342 494.475, 496.389 497.534, 495.896 498.797 C 495.403 500.060, 495 502.453, 495 504.113 C 495 505.773, 494.612 507.889, 494.137 508.816 C 493.662 509.742, 492.984 513.763, 492.630 517.750 L 491.986 525 621.615 525 L 751.245 525 750.630 516.250 C 749.513 500.329, 746.749 486.722, 742.455 476 C 740.147 470.236, 733.498 457.626, 730.679 453.665 C 723.433 443.485, 710.516 430.721, 701 424.339 C 693.680 419.429, 677.303 411, 675.085 411 C 674.473 411, 673.191 410.594, 672.236 410.097 C 670.673 409.285, 668.007 408.475, 658.500 405.925 C 648.903 403.351, 630.321 400.947, 621.500 401.139 C 617.650 401.223, 610.225 401.855, 605 402.544" stroke="none" fill="#040404" fill-rule="evenodd"></path></svg>
+    </div>
+    <div>
+      <div class="logo-name">One Expand Prospects</div>
+      <div class="logo-tag">Google Maps Lead Scraper</div>
+    </div>
+  </div>
+  <div class="header-right">
+    
+    <button class="btn-theme" id="btnTheme" title="Toggle dark mode">
+      <!-- Sun icon (shown in dark mode) -->
+      <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <!-- Moon icon (shown in light mode) -->
+      <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</div>
+
+<div id="mainContent">
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" data-tab="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Search
+    </div>
+    <div class="tab" data-tab="scrape">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      Scrape
+    </div>
+    <div class="tab" data-tab="leads">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Leads <span id="leadsCount" style="background:var(--primary);color:#fff;font-size:9px;padding:1px 5px;border-radius:10px;margin-left:3px;display:none"></span>
+    </div>
+    <div class="tab" data-tab="sync">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+      Sync
+    </div>
+    <div class="tab" data-tab="settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Settings
+    </div>
+  </div>
+
+  <!-- ════ SEARCH TAB ════ -->
+  <div class="tab-panel active" id="tab-search">
+    <div class="info-banner">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      Select <strong>&nbsp;Country&nbsp;</strong> first to unlock State &amp; City. Choose only <strong>&nbsp;State&nbsp;</strong> to search the entire state, or also select a <strong>&nbsp;City&nbsp;</strong> to narrow results to that city only.
+    </div>
+
+    <div class="form-panel">
+      <div id="alertSearch" class="alert"></div>
+
+      <!-- Row 1: Country / State / City -->
+      <div class="row-3">
+        <div>
+          <div class="field-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Country <span class="required">*</span>
+          </div>
+          <div class="select-wrap">
+            <select id="selCountry">
+              <option value="">Select Country</option>
+            </select>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div>
+          <div class="field-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+            State
+          </div>
+          <div class="select-wrap">
+            <select id="selState" disabled>
+              <option value="">Select State</option>
+            </select>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div>
+          <div class="field-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            City
+          </div>
+          <div class="select-wrap">
+            <select id="selCity" disabled>
+              <option value="">Select City</option>
+            </select>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Niche search query -->
+      <div class="row-1">
+        <div class="field-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Search Query <span class="required">*</span>
+          <span class="niche-badge">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span id="nicheCountBadge">440</span> niches available
+          </span>
+        </div>
+        <div class="dropdown-wrap">
+          <input type="text" class="dropdown-input" id="nicheInput" placeholder="e.g. Plumbing Service, Restaurant" autocomplete="off"/>
+          <svg class="arrow" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--text3);pointer-events:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          <div class="dropdown-list" id="nicheDropdown"></div>
+        </div>
+      </div>
+
+      <!-- Row 3: Radius + Open in Maps -->
+      <div class="row-2">
+        <div>
+          <div class="field-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+            Radius
+          </div>
+          <div class="select-wrap">
+            <select id="selRadius">
+              <option value="1km">1 km</option>
+              <option value="2km">2 km</option>
+              <option value="5km">5 km</option>
+              <option value="10km" selected>10 km</option>
+              <option value="20km">20 km</option>
+              <option value="50km">50 km</option>
+              <option value="100km">100 km</option>
+              <option value="">No radius limit</option>
+            </select>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-end">
+          <button class="btn-maps" id="btnOpenMaps">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Open in Google Maps
+          </button>
+        </div>
+      </div>
+
+      <!-- Tips Card -->
+      <div class="tips-card">
+        <div class="tips-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Search Tips for Better Results
+        </div>
+        <div class="tips-grid">
+          <div>
+            <div class="tips-col-title">Search Query Examples:</div>
+            <ul class="tips-list">
+              <li>restaurants</li>
+              <li>hotels</li>
+              <li>travel agencies</li>
+              <li>car dealerships</li>
+              <li>beauty salons</li>
+            </ul>
+          </div>
+          <div>
+            <div class="tips-col-title">Pro Tips:</div>
+            <ul class="tips-list">
+              <li>Enter only the business type — no city or country needed</li>
+              <li>Use the location fields above to target a specific area</li>
+              <li>Adjust the radius to widen or narrow your search area</li>
+              <li>Try different keywords if results are too few</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note-box">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          <span><strong>Note:</strong> Search results include business details, contact information, ratings, and social media links when available.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ SCRAPE TAB ════ -->
+  <div class="tab-panel" id="tab-scrape">
+    <div class="scraper-panel">
+      <div id="alertScrape" class="alert"></div>
+
+      <div class="status-card">
+        <div class="status-dot" id="statusDot"></div>
+        <div class="status-text" id="statusText">Ready — open Google Maps &amp; run a search, then click Start.</div>
+      </div>
+
+      <div class="progress-wrap" id="progressWrap" style="display:none">
+        <div class="progress-row">
+          <span id="progressLabel">Processing…</span>
+          <span id="progressCount">0 / 0</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" id="sTotal">0</div><div class="stat-lbl">Total Leads</div></div>
+        <div class="stat-card"><div class="stat-num g" id="sEmail">0</div><div class="stat-lbl">With Email</div></div>
+        <div class="stat-card"><div class="stat-num o" id="sPhone">0</div><div class="stat-lbl">With Phone</div></div>
+      </div>
+
+      <div class="btns-row">
+        <button class="btn btn-start" id="btnStart">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Start Scraping
+        </button>
+        <button class="btn btn-stop" id="btnStop" disabled>
+          <svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+          Stop
+        </button>
+      </div>
+
+      <div class="feed-box">
+        <div class="feed-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Live Feed
+        </div>
+        <div id="feedContent">
+          <div class="feed-empty">No leads yet — start scraping to see live results.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ LEADS TAB ════ -->
+  <div class="tab-panel" id="tab-leads">
+    <div class="leads-panel">
+      <div class="leads-toolbar">
+        <input type="text" class="search-box" id="searchLeads" placeholder="Search leads…"/>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Name</th><th>Category</th><th>Rating</th>
+              <th>Phone</th><th>Email</th><th>Social</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr><td colspan="7" class="no-data">No leads scraped yet</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="export-row">
+        <button class="btn-sm btn-csv" id="btnCsv">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export CSV
+        </button>
+        <button class="btn-sm btn-json" id="btnJson">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export JSON
+        </button>
+        <button class="btn-sm btn-clr" id="btnClear">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          Clear All
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ SYNC TAB ════ -->
+  <div class="tab-panel" id="tab-sync">
+    <div class="settings-panel">
+      <div id="alertSync" class="alert"></div>
+
+      <div class="settings-section">
+        <div class="section-hd">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          OneExpand CRM
+        </div>
+        <div class="field-group">
+          <label>CRM API Key</label>
+          <input type="text" class="field-input" id="crmKey" placeholder="oxp_..." style="font-family:'JetBrains Mono',monospace;font-size:11.5px"/>
+        </div>
+        <div class="field-group">
+          <label>CRM Endpoint</label>
+          <input type="text" class="field-input" id="crmUrl" value="https://oneexpandcrm.lovable.app/api/public/ingest-leads" style="font-family:'JetBrains Mono',monospace;font-size:11px"/>
+        </div>
+        <div class="setting-row">
+          <div class="setting-info"><div class="s-name">Auto-sync new leads</div><div class="s-desc">Push every scraped lead to CRM instantly</div></div>
+          <label class="toggle"><input type="checkbox" id="autoSync"/><span class="slider"></span></label>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="section-hd">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Google Sheet (optional)
+        </div>
+        <div class="field-group">
+          <label>Apps Script Web App URL</label>
+          <input type="text" class="field-input" id="sheetUrl" placeholder="https://script.google.com/macros/s/.../exec" style="font-family:'JetBrains Mono',monospace;font-size:11px"/>
+        </div>
+        <div class="setting-row">
+          <div class="setting-info"><div class="s-name">Mirror to Google Sheet</div><div class="s-desc">Server forwards each synced lead to your sheet</div></div>
+          <label class="toggle"><input type="checkbox" id="mirrorSheet"/><span class="slider"></span></label>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" id="syncTotal">0</div><div class="stat-lbl">Synced</div></div>
+        <div class="stat-card"><div class="stat-num g" id="syncOk">0</div><div class="stat-lbl">Success</div></div>
+        <div class="stat-card"><div class="stat-num o" id="syncFail">0</div><div class="stat-lbl">Failed</div></div>
+      </div>
+
+      <div class="btns-row">
+        <button class="btn btn-start" id="btnSyncCrm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+          Push all to CRM
+        </button>
+        <button class="btn btn-stop" id="btnSaveSync" style="background:var(--primary-l);color:var(--primary);border:1px solid rgba(37,99,235,.2)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save Settings
+        </button>
+      </div>
+
+      <div class="tips-card" style="margin-top:6px">
+        <div class="tips-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Get your API key
+        </div>
+        <ul class="tips-list">
+          <li>Open your CRM → Integrations</li>
+          <li>Copy the API key and paste above</li>
+          <li>Save, then click "Push all to CRM"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ SETTINGS TAB ════ -->
+  <div class="tab-panel" id="tab-settings">
+    <div class="settings-panel">
+
+      <div class="settings-section">
+        <div class="section-hd">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Data to Collect
+        </div>
+        <div class="setting-row">
+          <div class="setting-info"><div class="s-name">Email Scraping</div><div class="s-desc">Extract emails from business websites</div></div>
+          <label class="toggle"><input type="checkbox" id="opt-emails" checked/><span class="slider"></span></label>
+        </div>
+        <div class="setting-row">
+          <div class="setting-info"><div class="s-name">Social Media</div><div class="s-desc">Facebook, Instagram, Twitter, LinkedIn, TikTok</div></div>
+          <label class="toggle"><input type="checkbox" id="opt-social" checked/><span class="slider"></span></label>
+        </div>
+        <div class="setting-row">
+          <div class="setting-info"><div class="s-name">Review Insights</div><div class="s-desc">Scrape recent review text and rating</div></div>
+          <label class="toggle"><input type="checkbox" id="opt-reviews" checked/><span class="slider"></span></label>
+        </div>
+        <div class="setting-row">
+          <div class="setting-info"><div class="s-name">Opening Hours</div><div class="s-desc">Include business hours data</div></div>
+          <label class="toggle"><input type="checkbox" id="opt-hours"/><span class="slider"></span></label>
+        </div>
+        <div class="setting-row">
+          <div class="setting-info"><div class="s-name">Auto Remove Duplicates</div><div class="s-desc">Automatically skip duplicate businesses</div></div>
+          <label class="toggle"><input type="checkbox" id="opt-dedup" checked/><span class="slider"></span></label>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="section-hd">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+          Limits &amp; Filters
+        </div>
+        <div class="field-group">
+          <label>Max Leads Per Session</label>
+          <input type="number" class="field-input" id="opt-max" value="100" min="1" max="1000"/>
+        </div>
+        <div class="field-group">
+          <label>Min Star Rating Filter (0 = no filter)</label>
+          <input type="number" class="field-input" id="opt-rating" value="0" min="0" max="5" step="0.5"/>
+        </div>
+        <div class="field-group">
+          <label>Delay Between Requests (ms)</label>
+          <input type="number" class="field-input" id="opt-delay" value="1500" min="500" max="5000" step="100"/>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- NOT ON MAPS VIEW -->
+<div id="notOnMaps" class="not-maps" style="display:none">
+  <div class="not-maps-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+  </div>
+  <h3>Open Google Maps First</h3>
+  <p>This extension works on Google Maps.<br/>Navigate to Maps, search for businesses, then use the Scrape tab.</p>
+  <a class="btn-goto" href="https://www.google.com/maps" target="_blank">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    Open Google Maps
+  </a>
+</div>
+
+
+<!-- FOOTER -->
+<div style="background:var(--surface);border-top:1px solid var(--border);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;font-size:10px;color:var(--text3);">
+  <div style="display:flex;align-items:center;gap:7px;">
+    <span style="opacity:0.7;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 1000 1000"><path d="M 215.858 29.476 C 215.585 29.748, 211.343 30.409, 206.431 30.943 C 186.341 33.129, 173.120 36.621, 151 45.585 C 140.512 49.835, 115.122 64.387, 112 67.937 C 111.725 68.249, 108.808 70.529, 105.518 73.003 C 84.358 88.910, 62.529 115.938, 49.793 142 C 39.282 163.509, 34.147 180.862, 30.707 206.500 C 28.960 219.522, 28.960 780.478, 30.707 793.500 C 34.147 819.138, 39.282 836.491, 49.793 858 C 54.767 868.178, 63.786 882.997, 68.646 888.977 C 69.327 889.815, 72.771 894.100, 76.300 898.500 C 83.585 907.584, 96.669 920.346, 105.518 926.997 C 108.808 929.471, 111.725 931.751, 112 932.063 C 115.339 935.860, 141.722 950.774, 152.938 955.204 C 173.877 963.476, 186.450 966.802, 205 968.978 C 214.817 970.129, 785.183 970.129, 795 968.978 C 807.092 967.560, 820.845 964.629, 831.500 961.201 C 849.755 955.326, 875.888 941.769, 888.977 931.383 C 907.749 916.488, 917.064 907.175, 931.392 888.977 C 936.777 882.139, 946.586 865.721, 951.396 855.500 C 960.566 836.010, 966.606 815.227, 968.978 795 C 970.129 785.183, 970.129 214.817, 968.978 205 C 968.052 197.108, 966.859 190.477, 965.017 183 C 964.407 180.525, 963.529 176.925, 963.065 175 C 962.342 172.001, 958.728 161.857, 955.204 152.938 C 950.540 141.131, 938.730 120.342, 931.392 111.023 C 917.064 92.825, 907.749 83.512, 888.977 68.617 C 875.888 58.231, 849.755 44.674, 831.500 38.799 C 822.053 35.760, 809.281 32.926, 795.500 30.813 C 788.436 29.730, 216.922 28.411, 215.858 29.476 M 213 73.089 C 194.880 74.919, 179.057 79.524, 161 88.223 C 111.912 111.872, 78.495 159.650, 73.029 214 C 71.912 225.103, 71.912 774.897, 73.029 786 C 74.948 805.083, 79.258 820.285, 87.941 838.593 C 111.113 887.456, 159.686 921.509, 214 926.971 C 225.103 928.088, 774.897 928.088, 786 926.971 C 796.515 925.914, 803.237 924.619, 816 921.194 C 817.925 920.677, 822.997 918.848, 827.271 917.129 C 858.300 904.651, 883.400 884.374, 901.704 857 C 909.286 845.659, 917.889 827.162, 921.119 815.250 C 921.603 813.462, 922.488 810.313, 923.083 808.250 C 924.840 802.168, 925.989 795.144, 926.968 784.500 C 928.188 771.231, 928.188 228.769, 926.968 215.500 C 925.073 194.894, 921.096 180.461, 912.059 161.407 C 895.261 125.985, 865.168 98.111, 827.271 82.871 C 822.997 81.152, 817.925 79.323, 816 78.806 C 803.237 75.381, 796.515 74.086, 786 73.029 C 775.538 71.977, 223.439 72.034, 213 73.089 M 171.454 216.260 C 171.188 216.953, 171.090 231.465, 171.235 248.510 L 171.500 279.500 207.500 280 L 243.500 280.500 244 522.500 L 244.500 764.500 279.382 764.763 C 304.293 764.951, 314.655 764.702, 315.632 763.891 C 317.531 762.315, 317.698 218.098, 315.800 216.200 C 314.008 214.408, 172.142 214.467, 171.454 216.260 M 487.452 226.264 C 487.184 226.963, 487.085 239.002, 487.232 253.017 L 487.500 278.500 621.500 278.500 L 755.500 278.500 755.500 252 L 755.500 225.500 621.720 225.246 C 514.263 225.043, 487.844 225.243, 487.452 226.264 M 597.500 341.526 C 596.950 341.775, 593.125 342.399, 589 342.912 C 577.730 344.316, 562.193 347.901, 550.500 351.795 C 508.747 365.701, 474.941 391.946, 451.051 429 C 446.914 435.416, 437.431 453.672, 435.207 459.500 C 434.578 461.150, 433.113 464.975, 431.953 468 C 429.116 475.393, 427.974 478.835, 426.973 483 C 426.511 484.925, 425.643 488.300, 425.044 490.500 C 420.773 506.180, 417.596 533.844, 417.636 555 C 417.703 589.777, 423.740 623.805, 434.136 648 C 441.669 665.529, 452.943 685.460, 460.893 695.300 C 472.864 710.117, 489.682 726.671, 499.500 733.299 C 502.800 735.527, 505.725 737.613, 506 737.934 C 507.762 739.992, 528.267 751.102, 539.285 755.968 C 544.968 758.478, 560.854 763.851, 566.500 765.173 C 583.019 769.040, 588.108 769.770, 608.250 771.167 C 639.743 773.349, 672.035 769.735, 697.749 761.148 C 735.591 748.512, 766.117 725.574, 791.769 690.500 C 793.576 688.029, 800.088 676.914, 803.195 671 C 808.679 660.558, 816.978 638.434, 816.241 636.222 C 815.929 635.288, 806.892 635, 777.885 635 C 742.642 635, 739.894 635.125, 739.331 636.750 C 738.997 637.712, 737.050 642.137, 735.005 646.583 C 721.367 676.226, 695.995 697.445, 664 705.967 C 654.520 708.491, 652.222 708.941, 643 710.076 C 622.791 712.563, 596.098 709.901, 577.500 703.544 C 559.523 697.400, 544.150 687.988, 530.169 674.568 C 513.377 658.449, 502.382 639.863, 496.813 618.184 C 494.247 608.192, 493.783 606.066, 492.960 600.500 C 492.471 597.200, 491.768 591.914, 491.397 588.753 L 490.723 583.006 656.611 582.753 L 822.500 582.500 823.262 575.500 C 824.796 561.411, 825.276 526.727, 824.072 517 C 822.584 504.981, 821.092 495.552, 819.917 490.750 C 815.828 474.033, 814.729 470.534, 809.153 456.500 C 803.517 442.314, 791.881 422.928, 780.874 409.384 C 764.259 388.940, 734.279 366.404, 712 357.612 C 709.525 356.635, 706.150 355.228, 704.500 354.485 C 694.999 350.208, 679.513 346.126, 660.500 342.886 C 654.498 341.864, 599.387 340.674, 597.500 341.526 M 605 402.544 C 590.790 404.417, 588.306 404.949, 578.500 408.220 C 566.379 412.264, 558.174 416.257, 547.902 423.110 C 523.542 439.363, 505.574 464.175, 498.014 492 C 497.342 494.475, 496.389 497.534, 495.896 498.797 C 495.403 500.060, 495 502.453, 495 504.113 C 495 505.773, 494.612 507.889, 494.137 508.816 C 493.662 509.742, 492.984 513.763, 492.630 517.750 L 491.986 525 621.615 525 L 751.245 525 750.630 516.250 C 749.513 500.329, 746.749 486.722, 742.455 476 C 740.147 470.236, 733.498 457.626, 730.679 453.665 C 723.433 443.485, 710.516 430.721, 701 424.339 C 693.680 419.429, 677.303 411, 675.085 411 C 674.473 411, 673.191 410.594, 672.236 410.097 C 670.673 409.285, 668.007 408.475, 658.500 405.925 C 648.903 403.351, 630.321 400.947, 621.500 401.139 C 617.650 401.223, 610.225 401.855, 605 402.544" stroke="none" fill="#040404" fill-rule="evenodd"></path></svg></span>
+    <span>Developer: <strong style="color:var(--text2);">Muhammad Taimor</strong></span>
+  </div>
+  <div>
+    <a href="https://oneexpand.com" target="_blank" style="color:var(--primary);text-decoration:none;font-weight:500;">oneexpand.com</a>
+    &nbsp;·&nbsp; OneExpand © ALL RIGHTS RESERVED
+  </div>
+</div>
+<script src="data.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>
